@@ -6,6 +6,7 @@ plugins {
 android {
     namespace = "com.example.lista_de_compras"
     compileSdk = 36
+    buildFeatures
 
     defaultConfig {
         applicationId = "com.example.lista_de_compras"
@@ -32,6 +33,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 

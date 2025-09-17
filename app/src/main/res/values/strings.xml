@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">lista_de_compras</string>
+    <string name="logo_description">Logo do aplicativo</string>
 </resources>
