@@ -1,63 +1,69 @@
 package com.example.lista_de_compras
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.content.Intent
+import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.lista_de_compras.databinding.ActivityLoginBinding
+import com.example.lista_de_compras.models.User
 
 class LoginActivity : AppCompatActivity() {
-
-    // Declaração da variável de binding
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Inicializando o ViewBinding
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Configurando o clique do botão "Acessar"
-        binding.buttonLogin.setOnClickListener {
-            // Chamando a função de validação
-            validateLogin()
+        binding.imageViewLogo.setImageResource(android.R.drawable.ic_menu_gallery)
+
+        savedInstanceState?.let {
+            binding.editTextEmail.setText(it.getString("email", ""))
+            binding.editTextPassword.setText(it.getString("password", ""))
         }
 
-        // Configurando o clique do botão "Criar Conta" para navegação
-        binding.buttonCreateAccount.setOnClickListener {
-            val intent = Intent(this, CadastroActivity::class.java)
-            startActivity(intent)
+        binding.buttonLogin.setOnClickListener {
+            val email = binding.editTextEmail.text.toString().trim()
+            val password = binding.editTextPassword.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, getString(R.string.validation_empty), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidEmail(email)) {
+                Toast.makeText(this, getString(R.string.validation_email), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val user = DataManager.users.find { it.email == email && it.senha == password }
+//            Usuário mockado no código, apenas para teste
+            if (user != null || (email == "teste@teste.com" && password == "123456")) {
+                if (user == null) {
+                    DataManager.currentUser  = User("Usuário Teste", email, password)
+                } else {
+                    DataManager.currentUser  = user
+                }
+                Toast.makeText(this, getString(R.string.success_login), Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            } else {
+                Toast.makeText(this, getString(R.string.error_credentials), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.buttonCadastro.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
-    private fun validateLogin() {
-        // Acessando o texto dos campos usando o binding
-        val email = binding.editTextEmail.text.toString()
-        val password = binding.editTextPassword.text.toString()
+    private fun isValidEmail(email: String): Boolean {
+        return email.contains("@") && email.contains(".")
+    }
 
-        // Verificando se os campos estão vazios
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        // Validação de formato de e-mail simples
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "Por favor, insira um e-mail válido.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        // Simulação de login
-        // Conforme o documento do projeto, você pode usar dados simulados ("mocados")
-        if (email == "teste@email.com" && password == "123") {
-            // Se o login for bem-sucedido, navega para a tela de listas
-            val intent = Intent(this, SuasListasActivity::class.java)
-            startActivity(intent)
-            finish() // Impede que o usuário volte para a tela de login pelo botão "voltar"
-        } else {
-            // Se as credenciais estiverem erradas
-            Toast.makeText(this, "Credenciais inválidas. Tente novamente.", Toast.LENGTH_SHORT).show()
-        }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("email", binding.editTextEmail.text.toString())
+        outState.putString("password", binding.editTextPassword.text.toString())
     }
 }

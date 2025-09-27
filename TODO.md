@@ -1,0 +1,1 @@
+- [x] Change MainActivity.kt setContentView to R.layout.activity_suas_listas to fix the NullPointerException

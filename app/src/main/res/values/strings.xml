@@ -1,4 +1,21 @@
 <resources>
-    <string name="app_name">lista_de_compras</string>
-    <string name="logo_description">Logo do aplicativo</string>
+    <string name="app_name">Lista de Compras</string>
+    <string name="validation_empty">Preencha todos os campos</string>
+    <string name="validation_email">Email inválido</string>
+    <string name="validation_password_match">Senhas não coincidem</string>
+    <string name="validation_title_empty">Título da lista não pode ser vazio</string>
+    <string name="validation_item_empty">Nome, quantidade, unidade e categoria são obrigatórios</string>
+    <string name="success_register">Cadastro realizado! Faça login.</string>
+    <string name="success_login">Login realizado com sucesso</string>
+    <string name="error_credentials">Credenciais inválidas</string>
+    <string name="logout_message">Logout realizado</string>
+    <string name="no_lists">Nenhuma lista encontrada</string>
+    <string name="no_items">Nenhum item encontrado</string>
+    <string name="search_hint">Buscar listas...</string>
+    <string name="search_items_hint">Buscar itens...</string>
+    <string name="select_image">Selecionar imagem da galeria</string>
+    <string name="no_image">Sem imagem selecionada</string>
+    <string name="delete_confirm">Confirmar exclusão da lista?</string>
+    <string name="list_image_description">Imagem da lista de compras</string>
+    <string name="list_title">Título da lista</string>
 </resources>
