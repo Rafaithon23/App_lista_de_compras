@@ -18,6 +18,15 @@ class SuasListasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Check if user is logged in, if not, redirect to LoginActivity
+        if (DataManager.currentUser == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
         binding = ActivitySuasListasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -25,9 +34,6 @@ class SuasListasActivity : AppCompatActivity() {
         setupRecyclerView()
         setupSearchListener()
         setupFabListener()
-
-        // Se o seu projeto usa MainActivity, é possível que você precise iniciar o login aqui:
-        // Se DataManager.currentUser == null, navegue para LoginActivity
     }
 
     // onResume atualiza a lista (do código do seu colega)
