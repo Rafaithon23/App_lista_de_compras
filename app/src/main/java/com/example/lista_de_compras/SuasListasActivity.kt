@@ -18,7 +18,6 @@ class SuasListasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Check if user is logged in, if not, redirect to LoginActivity
         if (DataManager.currentUser == null) {
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -36,7 +35,6 @@ class SuasListasActivity : AppCompatActivity() {
         setupFabListener()
     }
 
-    // onResume atualiza a lista (do código do seu colega)
     override fun onResume() {
         super.onResume()
         loadListas()
@@ -47,7 +45,6 @@ class SuasListasActivity : AppCompatActivity() {
         supportActionBar?.title = "Suas Listas"
     }
 
-    // Configuração principal da lista
     private fun setupRecyclerView() {
         listAdapter = ListAdapter { lista ->
             val intent = Intent(this, ListDetailActivity::class.java).apply {
@@ -65,7 +62,6 @@ class SuasListasActivity : AppCompatActivity() {
         listAdapter.submitList(listasOrdenadas)
     }
 
-    // Lógica de Busca (RF005)
     private fun setupSearchListener() {
         binding.editTextSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -83,7 +79,6 @@ class SuasListasActivity : AppCompatActivity() {
         listAdapter.submitList(filteredListas)
     }
 
-    // Lógica do Botão FAB
     private fun setupFabListener() {
         binding.fabAddList.setOnClickListener {
             val intent = Intent(this, AddEditListActivity::class.java)
@@ -91,19 +86,13 @@ class SuasListasActivity : AppCompatActivity() {
         }
     }
 
-    // --- LÓGICA DE MENU E LOGOUT (DO SEU COLEGA) ---
-
-    // Cria o Menu (RF001)
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // Assume que você tem um arquivo de menu chamado R.menu.main_menu
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
 
-    // Lida com o item do Menu (RF001)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            // Assume que o item de logout no seu menu se chama R.id.action_logout
             R.id.action_logout -> {
                 logout()
                 true
@@ -112,12 +101,10 @@ class SuasListasActivity : AppCompatActivity() {
         }
     }
 
-    // Função de Logout (RF001)
     private fun logout() {
-        DataManager.clearUserData() // Remove os dados do usuário logado
+        DataManager.clearUserData()
 
         val intent = Intent(this, LoginActivity::class.java)
-        // Essas flags garantem que o usuário não volte para a tela de listas com o botão "Voltar"
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()

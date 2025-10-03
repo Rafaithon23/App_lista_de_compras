@@ -9,17 +9,17 @@ enum class Categoria(val nome: String) {
 }
 
 data class ItemDeCompra(
-    val id: String = java.util.UUID.randomUUID().toString(), // ID único para fácil manipulação
+    val id: String = java.util.UUID.randomUUID().toString(),
     var nome: String,
     var quantidade: Double,
-    var unidade: String, // Ex: "kg", "un", "L"
+    var unidade: String,
     var categoria: Categoria,
-    var comprado: Boolean = false // Requisito: marcar como comprado/não comprado
+    var comprado: Boolean = false
 )
 
 data class ListaDeCompras(
-    val id: String = java.util.UUID.randomUUID().toString(), // ID único
+    val id: String = java.util.UUID.randomUUID().toString(),
     var titulo: String,
-    var imagemUri: Uri? = null, // Imagem opcional (Uri para imagens locais)
-    val itens: MutableList<ItemDeCompra> = mutableListOf() // A lista de itens que ela contém
+    var imagemUri: Uri? = null,
+    val itens: MutableList<ItemDeCompra> = mutableListOf()
 )

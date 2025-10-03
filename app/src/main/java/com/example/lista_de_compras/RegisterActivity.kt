@@ -15,7 +15,6 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // TODO: Ajuste os IDs dos seus EditTexts se forem diferentes de 'editTextNome', etc.
         savedInstanceState?.let {
             binding.editTextNome.setText(it.getString("nome", ""))
             binding.editTextEmail.setText(it.getString("email", ""))

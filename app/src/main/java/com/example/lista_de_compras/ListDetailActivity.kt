@@ -7,8 +7,6 @@ import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lista_de_compras.databinding.ActivityListDetailBinding
-import com.example.lista_de_compras.models.ItemLista
-import java.util.Locale
 
 class ListDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityListDetailBinding
@@ -29,7 +27,7 @@ class ListDetailActivity : AppCompatActivity() {
         setupToolbar()
         setupRecyclerView()
         setupFab()
-        setupSearchListener() // Implementa a busca de itens (RF005)
+        setupSearchListener()
     }
 
     override fun onResume() {
@@ -39,15 +37,12 @@ class ListDetailActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         val list = DataManager.getListaById(listId)
-        // Assume que o layout usa um TextView para o título
         binding.textViewListTitle.text = list?.titulo ?: "Detalhes da Lista"
-        // Se houver uma Toolbar, descomentar e usar setSupportActionBar
     }
 
     private fun setupRecyclerView() {
         itemAdapter = ItemAdapter(
             onItemClick = { item ->
-                // Navega para a edição
                 val intent = Intent(this, AddEditItemActivity::class.java).apply {
                     putExtra("LIST_ID", listId)
                     putExtra("ITEM_ID", item.id)
@@ -56,7 +51,7 @@ class ListDetailActivity : AppCompatActivity() {
             },
             onBoughtToggle = { item ->
                 DataManager.toggleComprado(item.id)
-                loadItems() // Recarrega para mover o item na lista
+                loadItems()
             }
         )
         binding.recyclerViewItems.layoutManager = LinearLayoutManager(this)
@@ -72,38 +67,31 @@ class ListDetailActivity : AppCompatActivity() {
         }
     }
 
-    // LÓGICA DE BUSCA DE ITENS (RF005)
     private fun setupSearchListener() {
-        // Assume o ID editTextSearch do layout XML
         binding.editTextSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                loadItems(s.toString()) // Chama o loadItems com o termo de busca
+                loadItems(s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
     }
 
-    // Altera loadItems para aceitar um parâmetro opcional de busca
     private fun loadItems(query: String? = null) {
         var allItems = DataManager.getItensForLista(listId)
 
-        // 1. Filtra se houver termo de busca (RF005)
         if (!query.isNullOrEmpty()) {
             allItems = allItems.filter {
                 it.nome.contains(query, ignoreCase = true)
             }
         }
 
-        // 2. Lógica de Ordenação e Agrupamento (RF004)
         val nonComprados = allItems.filter { !it.comprado }
         val comprados = allItems.filter { it.comprado }
 
-        // Ordena os não comprados por Categoria e depois por Nome
         val sortedNonComprados = nonComprados
             .sortedWith(compareBy({ it.categoria }, { it.nome }))
 
-        // Junta as listas: Não Comprados (ordenados) + Comprados (no final)
         val finalItems = sortedNonComprados + comprados
 
         itemAdapter.submitList(finalItems)
