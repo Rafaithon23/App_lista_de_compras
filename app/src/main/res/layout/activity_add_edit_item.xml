@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="?attr/colorSurface"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".AddEditItemActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,12 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:boxStrokeColor="?attr/colorPrimary">
+            app:boxStrokeColor="?attr/colorPrimary"
+            android:hint="Nome do Item">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nome do Item"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -36,12 +38,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                app:boxStrokeColor="?attr/colorPrimary">
+                app:boxStrokeColor="?attr/colorPrimary"
+                android:hint="Quantidade">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextQuantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Quantidade"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,12 +52,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                app:boxStrokeColor="?attr/colorPrimary">
+                app:boxStrokeColor="?attr/colorPrimary"
+                android:hint="Unidade">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextUnit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Unidade"
                     android:inputType="text"
                     android:text="un" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -66,13 +68,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:boxStrokeColor="?attr/colorPrimary">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextCategory"
+            android:hint="Categoria"
+            app:boxStrokeColor="?attr/colorPrimary"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinnerCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Categoria"
-                android:inputType="text" />
+                android:inputType="none"
+                android:focusable="false"
+                tools:text="FRUTA" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
@@ -86,7 +93,7 @@
             android:id="@+id/buttonSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salvar"
+            android:text="Salvar Item"
             android:layout_marginBottom="16dp"
             style="@style/Widget.MaterialComponents.Button" />
 

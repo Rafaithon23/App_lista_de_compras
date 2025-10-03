@@ -14,7 +14,54 @@ object DataManager {
     val itens = mutableListOf<ItemLista>()
 
     init {
-        addUser(User("Usuário Teste", "teste@teste.com", "123456"))
+        val testUserEmail = "teste@teste.com"
+
+        // 1. Adiciona o Usuário de Teste (RF001)
+        addUser(User("Usuário Teste", testUserEmail, "123456"))
+
+        // --- DADOS DE TESTE MOCADOS VINCULADOS AO USUÁRIO ---
+
+        // 2. Cria Itens de Teste (para RF004)
+        val item1 = ItemLista(
+            nome = "Banana",
+            quantidade = 6.0,
+            unidade = "un",
+            categoria = "FRUTA",
+            comprado = false
+        )
+        val item2 = ItemLista(
+            nome = "Contra Filé",
+            quantidade = 1.5,
+            unidade = "kg",
+            categoria = "CARNE",
+            comprado = true
+        )
+
+        // 3. Cria Listas de Compras vinculadas ao ID do usuário
+        val listaSupermercado = ListaDeCompras(
+            titulo = "Supermercado Semanal",
+            userId = testUserEmail,
+            imagemUri = null
+        )
+
+        val listaFeira = ListaDeCompras(
+            titulo = "Feira",
+            userId = testUserEmail,
+            imagemUri = null
+        )
+
+        // Adiciona as listas ao DataManager (a função addLista atribui o ID)
+        addLista(listaSupermercado)
+        addLista(listaFeira)
+
+        // 4. Atribui itens à lista de supermercado (após a lista ter um ID)
+        item1.listaId = 1 // Assume o primeiro ID gerado
+        item2.listaId = 1 // Assume o primeiro ID gerado
+        addItem(item1)
+        addItem(item2)
+
+        // 5. Simula o login do usuário para que o DataManager encontre as listas (SOLUÇÃO DA TELA PRETA)
+        currentUser = users.find { it.email == testUserEmail }
     }
 
     fun addUser(user: User) {
@@ -32,6 +79,7 @@ object DataManager {
         val index = listas.indexOfFirst { it.id == oldId }
         if (index != -1) {
             newLista.id = listas[index].id
+            newLista.userId = listas[index].userId
             listas[index] = newLista
         }
     }
@@ -42,6 +90,7 @@ object DataManager {
     }
 
     fun getUserLists(): List<ListaDeCompras> {
+        // SOLUÇÃO: Retorna lista vazia se não houver usuário logado
         val userEmail = currentUser?.email ?: return emptyList()
 
         return listas

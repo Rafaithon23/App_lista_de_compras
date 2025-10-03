@@ -18,4 +18,12 @@
     <string name="delete_confirm">Confirmar exclusão da lista?</string>
     <string name="list_image_description">Imagem da lista de compras</string>
     <string name="list_title">Título da lista</string>
+    <string name="logo_description">Logo do aplicativo</string>
+    <string-array name="category_array">
+        <item>FRUTA</item>
+        <item>VERDURA</item>
+        <item>CARNE</item>
+        <item>PADARIA</item>
+        <item>OUTROS</item>
+    </string-array>
 </resources>
