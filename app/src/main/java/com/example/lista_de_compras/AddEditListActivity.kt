@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lista_de_compras.databinding.ActivityAddEditListBinding
 import com.example.lista_de_compras.models.ListaDeCompras
+import com.google.android.material.snackbar.Snackbar
 
 class AddEditListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddEditListBinding
@@ -70,7 +71,7 @@ class AddEditListActivity : AppCompatActivity() {
                 imagemUri = selectedImageUri
             )
             DataManager.addLista(newList)
-            Toast.makeText(this, getString(R.string.list_created), Toast.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, getString(R.string.list_created), Snackbar.LENGTH_SHORT).show()
         } else {
             val existingList = DataManager.getListaById(listId!!)
             existingList?.let {
@@ -80,7 +81,7 @@ class AddEditListActivity : AppCompatActivity() {
                     imagemUri = selectedImageUri
                 )
                 DataManager.updateLista(listId!!, updatedList)
-                Toast.makeText(this, getString(R.string.list_updated), Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, getString(R.string.list_updated), Snackbar.LENGTH_SHORT).show()
             }
         }
         finish()
@@ -89,7 +90,7 @@ class AddEditListActivity : AppCompatActivity() {
     private fun deleteList() {
         listId?.let {
             DataManager.deleteLista(it)
-            Toast.makeText(this, getString(R.string.list_deleted), Toast.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, getString(R.string.list_deleted), Snackbar.LENGTH_SHORT).show()
             finish()
         }
     }

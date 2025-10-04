@@ -43,8 +43,9 @@ class ItemAdapter(private val onItemClick: (ItemLista) -> Unit, private val onBo
             binding.textViewItemName.text = item.nome
             binding.textViewItemDetails.text = "${item.quantidade} ${item.unidade} - ${item.categoria}"
             binding.checkBoxBought.isChecked = item.comprado
-            binding.textViewItemName.alpha = if (item.comprado) 0.5f else 1.0f
-            binding.textViewItemDetails.alpha = if (item.comprado) 0.5f else 1.0f
+            val alpha = if (item.comprado) 0.5f else 1.0f
+            binding.textViewItemName.animate().alpha(alpha).setDuration(300).start()
+            binding.textViewItemDetails.animate().alpha(alpha).setDuration(300).start()
         }
     }
 
