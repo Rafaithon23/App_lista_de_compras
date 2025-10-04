@@ -59,21 +59,19 @@ class AddEditListActivity : AppCompatActivity() {
     private fun saveList() {
         val title = binding.editTextTitle.text.toString().trim()
         if (title.isEmpty()) {
-            Toast.makeText(this, "Título é obrigatório", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.title_required), Toast.LENGTH_SHORT).show()
             return
         }
 
         if (listId == null) {
-            // New list
             val newList = ListaDeCompras(
                 titulo = title,
                 userId = DataManager.currentUser?.email ?: "",
                 imagemUri = selectedImageUri
             )
             DataManager.addLista(newList)
-            Toast.makeText(this, "Lista criada", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.list_created), Toast.LENGTH_SHORT).show()
         } else {
-            // Update existing
             val existingList = DataManager.getListaById(listId!!)
             existingList?.let {
                 val updatedList = ListaDeCompras(
@@ -82,7 +80,7 @@ class AddEditListActivity : AppCompatActivity() {
                     imagemUri = selectedImageUri
                 )
                 DataManager.updateLista(listId!!, updatedList)
-                Toast.makeText(this, "Lista atualizada", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.list_updated), Toast.LENGTH_SHORT).show()
             }
         }
         finish()
@@ -91,7 +89,7 @@ class AddEditListActivity : AppCompatActivity() {
     private fun deleteList() {
         listId?.let {
             DataManager.deleteLista(it)
-            Toast.makeText(this, "Lista excluída", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.list_deleted), Toast.LENGTH_SHORT).show()
             finish()
         }
     }

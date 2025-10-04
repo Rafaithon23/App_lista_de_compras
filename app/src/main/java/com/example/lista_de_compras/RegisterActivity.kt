@@ -44,7 +44,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             if (DataManager.users.any { it.email == email }) {
-                Toast.makeText(this, "Erro: Email já cadastrado.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.email_already_registered), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

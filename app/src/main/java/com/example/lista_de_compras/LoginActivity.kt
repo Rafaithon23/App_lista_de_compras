@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
             val user = DataManager.users.find { it.email == email && it.senha == password }
             if (user != null || (email == "teste@teste.com" && password == "123")) {
                 if (user == null) {
-                    DataManager.currentUser  = User("Usuário Teste", email, password)
+                DataManager.currentUser  = User(getString(R.string.user_test), email, password)
                 } else {
                     DataManager.currentUser  = user
                 }

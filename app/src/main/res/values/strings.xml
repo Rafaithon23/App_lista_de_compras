@@ -19,6 +19,14 @@
     <string name="list_image_description">Imagem da lista de compras</string>
     <string name="list_title">Título da lista</string>
     <string name="logo_description">Logo do aplicativo</string>
+    <string name="list_created">Lista criada</string>
+    <string name="list_updated">Lista atualizada</string>
+    <string name="list_deleted">Lista excluída</string>
+    <string name="title_required">Título é obrigatório</string>
+    <string name="user_test">Usuário Teste</string>
+    <string name="email_already_registered">Erro: Email já cadastrado.</string>
+    <string name="item_saved">Item salvo</string>
+    <string name="item_deleted">Item excluído</string>
     <string-array name="category_array">
         <item>FRUTA</item>
         <item>VERDURA</item>
