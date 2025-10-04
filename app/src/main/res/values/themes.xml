@@ -1,7 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Base.Theme.Lista_de_compras" parent="Theme.Material3.DayNight.NoActionBar">
-
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/background</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorError">@color/primary</item>
+        <item name="colorOnError">@color/white</item>
     </style>
 
     <style name="Theme.Lista_de_compras" parent="Base.Theme.Lista_de_compras" />

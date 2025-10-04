@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="?attr/colorSurface"
+    android:background="@color/background"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -70,7 +70,7 @@
             android:id="@+id/buttonCadastrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cadastrar"
+        android:text="Criar"
             android:layout_marginBottom="16dp"
             style="@style/Widget.MaterialComponents.Button" />
 

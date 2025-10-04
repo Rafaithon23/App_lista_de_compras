@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lista_de_compras.databinding.ActivitySuasListasBinding
 
@@ -97,6 +98,10 @@ class SuasListasActivity : AppCompatActivity() {
                 logout()
                 true
             }
+            R.id.action_theme_toggle -> {
+                toggleTheme()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -108,5 +113,15 @@ class SuasListasActivity : AppCompatActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
+    }
+
+    private fun toggleTheme() {
+        val currentNightMode = AppCompatDelegate.getDefaultNightMode()
+        if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        recreate()
     }
 }

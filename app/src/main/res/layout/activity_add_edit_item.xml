@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="?attr/colorSurface"
+    android:background="@color/background"
     android:fitsSystemWindows="true"
     tools:context=".AddEditItemActivity">
 
@@ -93,7 +93,7 @@
             android:id="@+id/buttonSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salvar Item"
+            android:text="Adicionar"
             android:layout_marginBottom="16dp"
             style="@style/Widget.MaterialComponents.Button" />
 

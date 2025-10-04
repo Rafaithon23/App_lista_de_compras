@@ -13,7 +13,7 @@
         android:layout_height="100dp"
         android:scaleType="centerCrop"
         android:src="@drawable/placeholder"
-        android:background="#E0E0E0"
+        android:background="@color/card_background"
         android:layout_gravity="center_horizontal"
         tools:src="@drawable/ic_launcher_foreground"
         android:contentDescription="@string/list_image_description" />
