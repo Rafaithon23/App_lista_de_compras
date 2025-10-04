@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lista_de_compras.databinding.ActivityListDetailBinding
@@ -37,7 +38,12 @@ class ListDetailActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         val list = DataManager.getListaById(listId)
-        binding.textViewListTitle.text = list?.titulo ?: "Detalhes da Lista"
+        if (list == null) {
+            Toast.makeText(this, "Lista não encontrada", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+        binding.textViewListTitle.text = list.titulo
     }
 
     private fun setupRecyclerView() {

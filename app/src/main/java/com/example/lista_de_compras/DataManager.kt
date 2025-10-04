@@ -90,6 +90,7 @@ object DataManager {
     }
 
     fun getListaById(id: Int): ListaDeCompras? {
+        if (id <= 0) return null
         return listas.find { it.id == id }
     }
 
@@ -112,6 +113,7 @@ object DataManager {
     }
 
     fun getItensForLista(listId: Int): List<ItemLista> {
+        if (listId <= 0) return emptyList()
         return itens.filter { it.listaId == listId }.sortedBy { it.nome.lowercase() }
     }
 
