@@ -18,7 +18,7 @@ class ListDetailActivity : AppCompatActivity() {
         binding = ActivityListDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        listId = intent.getIntExtra("LIST_ID", -1)
+        listId = intent.getIntExtra("LISTA_ID", -1)
         if (listId == -1) {
             finish()
             return
