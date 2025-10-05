@@ -15,12 +15,15 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.imageViewLogo.setImageResource(android.R.drawable.ic_menu_gallery)
+
+        binding.imageViewLogo.setImageResource(R.drawable.meu_logo)
+
 
         savedInstanceState?.let {
             binding.editTextEmail.setText(it.getString("email", ""))
             binding.editTextPassword.setText(it.getString("password", ""))
         }
+
 
         binding.buttonLogin.setOnClickListener {
             val email = binding.editTextEmail.text.toString().trim()
@@ -39,12 +42,12 @@ class LoginActivity : AppCompatActivity() {
             val user = DataManager.users.find { it.email == email && it.senha == password }
             if (user != null || (email == "teste@teste.com" && password == "123")) {
                 if (user == null) {
-                DataManager.currentUser  = User(getString(R.string.user_test), email, password)
+                    DataManager.currentUser = User(getString(R.string.user_test), email, password)
                 } else {
-                    DataManager.currentUser  = user
+                    DataManager.currentUser = user
                 }
-                Toast.makeText(this, getString(R.string.success_login), Toast.LENGTH_SHORT).show()
 
+                Toast.makeText(this, getString(R.string.success_login), Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, SuasListasActivity::class.java))
                 finish()
             } else {
@@ -52,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        
         binding.buttonCadastro.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
