@@ -9,11 +9,11 @@
     android:background="@color/background">
 
     <ImageView
+        app:srcCompat="@drawable/logo"
         android:id="@+id/imageViewLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="152dp"
+        android:layout_height="141dp"
         android:layout_marginBottom="32dp"
-        android:src="@android:drawable/ic_menu_gallery"
         android:contentDescription="@string/app_name" />
 
     <com.google.android.material.textfield.TextInputLayout
