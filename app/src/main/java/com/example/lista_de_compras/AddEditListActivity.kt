@@ -1,5 +1,6 @@
 package com.example.lista_de_compras
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -14,8 +15,10 @@ class AddEditListActivity : AppCompatActivity() {
     private var listId: Int? = null
     private var selectedImageUri: String? = null
 
-    private val imagePickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+    private val imagePickerLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
         uri?.let {
+
+            saveUriPermission(it)
             selectedImageUri = it.toString()
             binding.imageViewPreview.setImageURI(it)
         }
@@ -34,7 +37,7 @@ class AddEditListActivity : AppCompatActivity() {
         }
 
         binding.buttonSelectImage.setOnClickListener {
-            imagePickerLauncher.launch("image/*")
+            imagePickerLauncher.launch(arrayOf("image/*"))
         }
 
         binding.buttonSave.setOnClickListener {
@@ -97,6 +100,17 @@ class AddEditListActivity : AppCompatActivity() {
             DataManager.deleteLista(it)
             Snackbar.make(binding.root, getString(R.string.list_deleted), Snackbar.LENGTH_SHORT).show()
             finish()
+        }
+    }
+
+    private fun saveUriPermission(uri: Uri) {
+        val contentResolver = applicationContext.contentResolver
+
+        val takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+        try {
+            contentResolver.takePersistableUriPermission(uri, takeFlags)
+        } catch (e: SecurityException) {
+            e.printStackTrace()
         }
     }
 }
