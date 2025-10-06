@@ -52,7 +52,12 @@ class AddEditListActivity : AppCompatActivity() {
             binding.editTextTitle.setText(it.titulo)
             selectedImageUri = it.imagemUri
             if (it.imagemUri != null) {
-                binding.imageViewPreview.setImageURI(Uri.parse(it.imagemUri))
+                try {
+                    binding.imageViewPreview.setImageURI(Uri.parse(it.imagemUri))
+                } catch (e: Exception) {
+                    binding.imageViewPreview.setImageResource(R.drawable.placeholder)
+                    selectedImageUri = null
+                }
             }
         }
     }
