@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +45,26 @@ class ListDetailActivity : AppCompatActivity() {
             finish()
             return
         }
-        binding.textViewListTitle.text = list.titulo
+        binding.toolbar.title = list.titulo
+        setSupportActionBar(binding.toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(com.example.lista_de_compras.R.menu.list_detail_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            com.example.lista_de_compras.R.id.action_edit_list -> {
+                val intent = Intent(this, AddEditListActivity::class.java).apply {
+                    putExtra("LIST_ID", listId)
+                }
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun setupRecyclerView() {

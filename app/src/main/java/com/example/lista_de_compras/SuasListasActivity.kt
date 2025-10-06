@@ -47,12 +47,21 @@ class SuasListasActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        listAdapter = ListAdapter { lista ->
-            val intent = Intent(this, ListDetailActivity::class.java).apply {
-                putExtra("LISTA_ID", lista.id)
+        listAdapter = ListAdapter(
+            onItemClick = { lista ->
+                val intent = Intent(this, ListDetailActivity::class.java).apply {
+                    putExtra("LISTA_ID", lista.id)
+                }
+                startActivity(intent)
+            },
+            onItemLongClick = { lista ->
+                val intent = Intent(this, AddEditListActivity::class.java).apply {
+                    putExtra("LIST_ID", lista.id)
+                }
+                startActivity(intent)
+                true
             }
-            startActivity(intent)
-        }
+        )
 
         binding.recyclerViewListas.layoutManager = GridLayoutManager(this, 2)
         binding.recyclerViewListas.adapter = listAdapter

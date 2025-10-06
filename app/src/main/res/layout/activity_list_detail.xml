@@ -7,19 +7,18 @@
     android:fitsSystemWindows="true"
     tools:context=".ListDetailActivity">
 
-    <TextView
-        android:id="@+id/textViewListTitle"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:paddingStart="16dp"
-        android:paddingTop="32dp"
-        android:paddingEnd="16dp"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Nome da Lista" />
+        app:title="Nome da Lista"
+        app:titleTextColor="@android:color/white" />
 
     <EditText
         android:id="@+id/editTextSearch"
@@ -32,7 +31,7 @@
         android:padding="10dp"
         android:background="@drawable/rounded_edittext_bg"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/textViewListTitle"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

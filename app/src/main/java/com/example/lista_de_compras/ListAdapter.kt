@@ -9,7 +9,8 @@ import com.example.lista_de_compras.databinding.ItemListBinding
 import com.example.lista_de_compras.models.ListaDeCompras
 
 class ListAdapter(
-    private val onItemClick: (ListaDeCompras) -> Unit
+    private val onItemClick: (ListaDeCompras) -> Unit,
+    private val onItemLongClick: (ListaDeCompras) -> Boolean
 ) :
     ListAdapter<ListaDeCompras, ListAdapter.ListViewHolder>(ListDiffCallback()) {
 
@@ -28,6 +29,14 @@ class ListAdapter(
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClick(getItem(position))
+                }
+            }
+            binding.root.setOnLongClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemLongClick(getItem(position))
+                } else {
+                    false
                 }
             }
         }
